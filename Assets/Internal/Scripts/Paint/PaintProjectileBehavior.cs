@@ -27,6 +27,7 @@ public class PaintProjectileBehavior : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<Renderer>().material.SetColor("_Color",_manager.paintBombColor);
         if (paintDiameter > 0)
         {
 

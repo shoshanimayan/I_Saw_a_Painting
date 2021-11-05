@@ -8,14 +8,12 @@ public class MyShaderBehavior : MonoBehaviour
     [Tooltip("Number of pixels per 1 unit of size in world coordinates.")]
     [Range(16, 8182)]
     public int textureSize = 64;
-
     private readonly Color _color = new Color(0, 0, 0, 0);
-
     private Material _material;
     private Texture2D _texture;
     private bool _isEnabled = false;
-
     private object m_lockFlag = new object();
+
 
     void Awake()
     {
@@ -39,15 +37,31 @@ public class MyShaderBehavior : MonoBehaviour
                 for (int y = 0; y < textureSize; ++y)
                     _texture.SetPixel(x, y, _color);
             _texture.Apply();
-
             _material.SetTexture("_DrawingTex", _texture);
             _isEnabled = true;
         }
+
     }
 
     public void PaintOnColored(Vector2 textureCoord, float[,] splashTexture, Color color)
     {
         MyPaintOn(textureCoord, splashTexture, color);
+    }
+
+    public void RestartColor()
+    {
+
+        if (null != _material)
+        {
+            _texture = new Texture2D(textureSize, textureSize);
+            for (int x = 0; x < textureSize; ++x)
+                for (int y = 0; y < textureSize; ++y)
+                    _texture.SetPixel(x, y, _color);
+            _texture.Apply();
+            _material.SetTexture("_DrawingTex", _texture);
+            _isEnabled = true;
+        }
+
     }
 
     private void MyPaintOn(Vector2 textureCoord, float[,] splashTexture, Color targetColor)

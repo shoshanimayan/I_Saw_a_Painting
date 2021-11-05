@@ -2,41 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState {Menu,Play,Auto }
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private static List<string> recording= new List<string>();
-
+    private static List<string> _recording= new List<string>();
+    private static GameState _State;
     private void Awake()
     {
-        recording.Clear();
+
+        _recording.Clear();
+        _State = GameState.Menu;
+    }
+
+    private static void ResetMaterials()
+    {
+        foreach (MyShaderBehavior painted in Resources.FindObjectsOfTypeAll(typeof(MyShaderBehavior)) as MyShaderBehavior[])
+        {
+            painted.RestartColor();
+        }
     }
 
     public static void AddSplash(string splashInfo)
     {
-        recording.Add( splashInfo);
+        _recording.Add( splashInfo);
 
-        Debug.Log(JsonUtility.ToJson(recording.ToArray()));
+        Debug.Log(_recording.ToArray().Length);
 
 
     }
 
-    private static void Ended()
+    public static void Ended()
     {
-        recording.Clear();
+        _State = GameState.Menu;
+        _recording.Clear();
+        ResetMaterials();
     }
 
-    private static void PlayGame()
-    { 
+    public static void PlayGame()
+    {
+        _State = GameState.Play;
+
+    }
+
+    public static void PlayRecord()
+    {
+        _State = GameState.Auto;
+
+    }
+
+    public static GameState GetState()
+    {
+        return _State;
+    }
+
     
-    }
-
-    private static void PlayRecord()
-    { 
-    
-    }
-
-
-
 
 }
