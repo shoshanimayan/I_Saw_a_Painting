@@ -1,4 +1,4 @@
-﻿Shader "Custom/PaintShaders/WhiteSpaceShader" {
+Shader "Custom/PaintShaders/WhiteSpaceShader" {
 	Properties{
 		[HideInInspector]_DrawingTex("Drawing texture", 2D) = "" {}
 

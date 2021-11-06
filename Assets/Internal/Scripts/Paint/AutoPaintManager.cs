@@ -24,7 +24,7 @@ public class AutoPaintManager : MonoBehaviour
     private void Start()
     {
 
-        AutoPaint(_name, _coor, _color,_alphaNum);
+       // AutoPaint(_name, _coor, _color,_alphaNum);
     }
 
     private void AutoPaint(string name, Vector2 coordinate, Color color, int alpha)
