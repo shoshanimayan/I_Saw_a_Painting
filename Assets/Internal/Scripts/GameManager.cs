@@ -27,9 +27,6 @@ public class GameManager : MonoBehaviour
     {
         _recording.Add( splashInfo);
 
-        Debug.Log(_recording.ToArray().Length);
-
-
     }
 
     public static void Ended()
