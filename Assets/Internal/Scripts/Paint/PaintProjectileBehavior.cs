@@ -35,10 +35,11 @@ public class PaintProjectileBehavior : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!_isActive)
             return;
+
         _isActive = false;
         Destroy(gameObject);
         Debug.Log("hit");
