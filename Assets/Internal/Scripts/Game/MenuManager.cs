@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _menus;
+    [SerializeField] private GameObject _menus;
     private bool _active;
     // Update is called once per frame
     void Update()
@@ -14,10 +14,7 @@ public class MenuManager : MonoBehaviour
             {
                 if (!_active)
                 {
-                    foreach (GameObject obj in _menus)
-                    {
-                        obj.SetActive(true);
-                    }
+                _menus.SetActive(true);
                     _active = true;
                 }
             }
@@ -25,11 +22,8 @@ public class MenuManager : MonoBehaviour
             {
                 if (_active)
                 {
-                    foreach (GameObject obj in _menus)
-                    {
-                        obj.SetActive(false);
-                    }
-                    _active = false;
+                _menus.SetActive(false);
+                _active = false;
                 }
             }
     }
@@ -48,7 +42,7 @@ public class MenuManager : MonoBehaviour
         GameManager.Ended();
     }
 
-    public void QuitGame()
+    public void QuitApplication()
     {
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
