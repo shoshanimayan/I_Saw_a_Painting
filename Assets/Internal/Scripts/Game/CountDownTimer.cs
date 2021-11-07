@@ -31,7 +31,7 @@ public class CountDownTimer : MonoBehaviour
         }
         else
         {
-            if (GameManager.GetState() == GameState.Play)
+            if (GameManager.GetState() == GameState.Play && !_active)
             {
                 _active = true; 
             }
