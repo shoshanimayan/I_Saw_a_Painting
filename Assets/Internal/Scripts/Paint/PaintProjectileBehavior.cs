@@ -24,6 +24,7 @@ public class PaintProjectileBehavior : MonoBehaviour
     
     private bool _isActive = false;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
+    private AudioManager _audioManager { get { return AudioManager.Instance; } }
 
     private void Start()
     {
@@ -39,15 +40,21 @@ public class PaintProjectileBehavior : MonoBehaviour
     {
         if (!_isActive)
             return;
-
+        _audioManager.PlayClip("splat");
         _isActive = false;
         Destroy(gameObject);
-        Debug.Log("hit");
+
+        if (other.gameObject.GetComponent<PaintChangeObjectBehavior>())
+        {
+            other.gameObject.GetComponent<PaintChangeObjectBehavior>().ChangeColor();
+        }
         ParticleSystem burstParticle = Instantiate(_manager.burstParticlePrefab);
         burstParticle.transform.position = transform.position;
         var burstSettings = burstParticle.main;
         burstSettings.startColor = _manager.paintBombColor;
         burstParticle.Play();
+
+
 
         for (int i = 0; i < 14; ++i)
         {

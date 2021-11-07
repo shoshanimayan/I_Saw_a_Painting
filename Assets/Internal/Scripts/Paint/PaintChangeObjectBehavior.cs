@@ -7,6 +7,7 @@ public class PaintChangeObjectBehavior : MonoBehaviour
     [SerializeField] private Color _color;
     private bool _active;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
+
     private void Start()
     {
         GetComponent<Renderer>().material.SetColor("_Color", _color);
@@ -47,13 +48,4 @@ public class PaintChangeObjectBehavior : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Paint")
-        {
-            ChangeColor();
-        }
-        gameObject.SetActive(false);
-
-    }
 }
