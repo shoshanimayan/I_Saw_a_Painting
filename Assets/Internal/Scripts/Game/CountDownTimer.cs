@@ -10,7 +10,7 @@ public class CountDownTimer : MonoBehaviour
 
     private void EndTimer()
     {
-        GameManager.Ended();
+        GameManager.ToMenu();
         _currentTime = 0;
         _active = false;
 

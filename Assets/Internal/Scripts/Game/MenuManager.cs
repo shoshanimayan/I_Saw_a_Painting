@@ -39,7 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void EndGame()
     {
-        GameManager.Ended();
+        GameManager.ToMenu();
     }
 
     public void QuitApplication()

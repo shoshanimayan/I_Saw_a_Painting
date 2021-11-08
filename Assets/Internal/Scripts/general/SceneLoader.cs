@@ -91,7 +91,6 @@ public class SceneLoader : Singleton<SceneLoader>
             _handle = obj;
             _unloaded = false;
             StartCoroutine(ResetCamera());
-            GameManager.PlayGame();
             _canvasLoading.SetActive(false);
         }
     }

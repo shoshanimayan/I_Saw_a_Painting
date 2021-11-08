@@ -36,7 +36,7 @@ public class Shooter : MonoBehaviour
         {
             if (GameManager.GetState() == GameState.Play)
             {
-                GameManager.Ended();
+                GameManager.ToMenu();
             }
             else { GameManager.PlayGame(); }
         }

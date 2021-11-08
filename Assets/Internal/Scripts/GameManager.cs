@@ -29,21 +29,23 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void Ended()
+    public static void ToMenu()
     {
         _State = GameState.Menu;
         _recording.Clear();
-        ResetMaterials();
     }
 
     public static void PlayGame()
     {
+        ResetMaterials();
+
         _State = GameState.Play;
 
     }
 
     public static void PlayRecord()
     {
+        ResetMaterials();
         _State = GameState.Auto;
 
     }
