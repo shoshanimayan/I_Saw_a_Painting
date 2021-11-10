@@ -22,8 +22,8 @@ public class MoveUpDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (GameManager.GetState() == GameState.Play)
+
+        if (GameManager.GetState() != GameState.Menu)
         {
             if (!_active) { _active = true; }
             if (_up) 

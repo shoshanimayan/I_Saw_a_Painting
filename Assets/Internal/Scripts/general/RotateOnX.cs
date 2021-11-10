@@ -17,7 +17,7 @@ public class RotateOnX : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.GetState() == GameState.Play)
+        if (GameManager.GetState() != GameState.Menu)
         {
             if (!_active) { _active = true; }
             transform.Rotate(_direction * _speed * Time.deltaTime, _yAxis, _zAxis);
