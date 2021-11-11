@@ -19,7 +19,6 @@ public class AudioManager : Singleton<AudioManager>
         {
             if (clip.name == name)
             {
-                Debug.Log(clip.name);
                 _as.PlayOneShot(clip);
             }
         }

@@ -8,8 +8,7 @@ public class RotateOnX : MonoBehaviour
     private Quaternion _origin;
     private bool _active;
     [SerializeField] private int _speed = 25;
-    [SerializeField] private int _zAxis = 0;
-    [SerializeField] private int _yAxis = 0;
+    [SerializeField] private bool _forward;
 
     private void Start()
     {
@@ -17,10 +16,18 @@ public class RotateOnX : MonoBehaviour
     }
     void Update()
     {
+
         if (GameManager.GetState() != GameState.Menu)
         {
             if (!_active) { _active = true; }
-            transform.Rotate(_direction * _speed * Time.deltaTime, _yAxis, _zAxis);
+            if (!_forward)
+            {
+                transform.Rotate(transform.right, _speed * Time.deltaTime);
+            }
+            else 
+            {
+                transform.Rotate(transform.up, _speed * Time.deltaTime);
+            }
         }
         else 
         {

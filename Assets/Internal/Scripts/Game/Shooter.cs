@@ -32,14 +32,7 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (GameManager.GetState() == GameState.Play)
-            {
-                GameManager.ToMenu();
-            }
-            else { GameManager.PlayGame(); }
-        }
+      
 
         if (GameManager.GetState() == GameState.Play)
         {

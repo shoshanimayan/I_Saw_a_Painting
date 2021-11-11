@@ -7,14 +7,22 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _menus;
     private bool _active;
+    private bool _loaded;
     // Update is called once per frame
-    void Update()
+
+    private void Awake()
     {
+        _menus.SetActive(false);
+
+    }
+    private void Update()
+    {
+      
             if (GameManager.GetState() == GameState.Menu)
             {
                 if (!_active)
                 {
-                _menus.SetActive(true);
+                    _menus.SetActive(true);
                     _active = true;
                 }
             }
@@ -22,10 +30,11 @@ public class MenuManager : MonoBehaviour
             {
                 if (_active)
                 {
-                _menus.SetActive(false);
-                _active = false;
+                    _menus.SetActive(false);
+                    _active = false;
                 }
             }
+    
     }
 
     public void Play()

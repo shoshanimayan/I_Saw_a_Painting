@@ -11,7 +11,10 @@ public class PaintChangeSpawner : MonoBehaviour
     [SerializeField] private PaintChangeObjectBehavior _colorChangeObject;
     private int _lastColorIndex = -1;
     private bool _active;
-
+    private void Awake()
+    {
+        _colorChangeObject.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +31,7 @@ public class PaintChangeSpawner : MonoBehaviour
             if (_active)
             {
                 _active = false;
+                _colorChangeObject.gameObject.SetActive(false);
                 CancelInvoke();
             }
         }

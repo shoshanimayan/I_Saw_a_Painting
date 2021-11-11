@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public enum GameState {Menu,Play,Auto }
+public enum GameState {Menu,Play,Auto,None }
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,8 +12,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
 
-        _recording.Clear();
-        _State = GameState.Menu;
+        _State = GameState.None;
     }
 
     private static void ResetMaterials()
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
             painted.RestartColor();
         }
     }
+
 
     public static void AddSplash(string splashInfo)
     {
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     {
         _State = GameState.Menu;
         _recording.Clear();
+        FindObjectOfType<XRRig>().transform.eulerAngles = Vector3.zero;
+
     }
 
     public static void PlayGame()

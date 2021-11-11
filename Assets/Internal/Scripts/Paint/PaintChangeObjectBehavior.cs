@@ -5,7 +5,6 @@ using UnityEngine;
 public class PaintChangeObjectBehavior : MonoBehaviour
 {
     [SerializeField] private Color _color;
-    private bool _active;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
 
     private void Start()
@@ -21,31 +20,13 @@ public class PaintChangeObjectBehavior : MonoBehaviour
     public void ChangeColor()
     {
         _manager.paintBombColor = _color;
+        gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-
-        if (GameManager.GetState() == GameState.Play)
-        {
-            if (!_active)
-            {
-                _active = true;
-                 gameObject.SetActive(true); 
-
-            }
-        }
-        else
-        {
-            if (_active)
-            {
-                _active = false;
-                gameObject.SetActive(false); 
-            }
-        }
+   
 
         
         
-    }
+    
 
 }

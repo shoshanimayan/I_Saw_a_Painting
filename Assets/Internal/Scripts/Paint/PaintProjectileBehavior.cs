@@ -40,19 +40,23 @@ public class PaintProjectileBehavior : MonoBehaviour
     {
         if (!_isActive)
             return;
-        _audioManager.PlayClip("splat");
         _isActive = false;
         Destroy(gameObject);
-
-        if (other.gameObject.GetComponent<PaintChangeObjectBehavior>())
-        {
-            other.gameObject.GetComponent<PaintChangeObjectBehavior>().ChangeColor();
-        }
         ParticleSystem burstParticle = Instantiate(_manager.burstParticlePrefab);
         burstParticle.transform.position = transform.position;
         var burstSettings = burstParticle.main;
+        if (other.gameObject.GetComponent<PaintChangeObjectBehavior>())
+        {
+            other.gameObject.GetComponent<PaintChangeObjectBehavior>().ChangeColor();
+            burstSettings.startColor = _manager.paintBombColor;
+            burstParticle.Play();
+            _audioManager.PlayClip("sparkle");
+            return;
+        }
+
         burstSettings.startColor = _manager.paintBombColor;
         burstParticle.Play();
+        _audioManager.PlayClip("splat");
 
 
 
