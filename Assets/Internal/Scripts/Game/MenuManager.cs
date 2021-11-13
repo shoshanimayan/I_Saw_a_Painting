@@ -3,43 +3,22 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : Singleton<MenuManager>
 {
     [SerializeField] private GameObject _menus;
-    private bool _active;
-    private bool _loaded;
-    // Update is called once per frame
-
-    private void Awake()
+   
+    public void SetMenu(bool enabled)
     {
-        _menus.SetActive(false);
+        _menus.SetActive(enabled);
 
-    }
-    private void Update()
-    {
-      
-            if (GameManager.GetState() == GameState.Menu)
-            {
-                if (!_active)
-                {
-                    _menus.SetActive(true);
-                    _active = true;
-                }
-            }
-            else
-            {
-                if (_active)
-                {
-                    _menus.SetActive(false);
-                    _active = false;
-                }
-            }
-    
     }
 
     public void Play()
     {
-        GameManager.PlayGame();
+        if (GameManager._loaded)
+        {
+            GameManager.PlayGame();
+        }
     }
     public void RunAuto()
     {

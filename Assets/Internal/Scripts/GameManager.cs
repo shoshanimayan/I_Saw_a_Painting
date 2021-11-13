@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private static List<string> _recording= new List<string>();
     private static GameState _State;
+    private static HandManager _handManager { get { return HandManager.Instance; } }
+    private static MenuManager _menuManager { get { return MenuManager.Instance; } }
+    public static bool _loaded;
     private void Awake()
     {
-
-        _State = GameState.None;
+        _State = GameState.Menu;
     }
 
     private static void ResetMaterials()
@@ -35,13 +37,16 @@ public class GameManager : MonoBehaviour
         _State = GameState.Menu;
         _recording.Clear();
         FindObjectOfType<XRRig>().transform.eulerAngles = Vector3.zero;
+        _handManager.SetHandStatus(true);
+        _menuManager.SetMenu(true);
 
     }
 
     public static void PlayGame()
     {
         ResetMaterials();
-
+        _handManager.SetHandStatus(false);
+        _menuManager.SetMenu(false);
         _State = GameState.Play;
 
     }
@@ -49,6 +54,8 @@ public class GameManager : MonoBehaviour
     public static void PlayRecord()
     {
         ResetMaterials();
+        _handManager.SetHandStatus(false);
+        _menuManager.SetMenu(false);
         _State = GameState.Auto;
 
     }

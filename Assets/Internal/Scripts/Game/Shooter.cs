@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    
 
-    //Drag in the Bullet Prefab from the Component Inspector.
-    public GameObject Bullet;
+
+
+    private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
 
     //Enter the Speed of the Bullet from the Component Inspector.
-    public float Bullet_Forward_Force;
+    [SerializeField] private float Bullet_Forward_Force;
 
 
     private bool _isActive;
@@ -18,19 +18,23 @@ public class Shooter : MonoBehaviour
     private void Start()
     {
         _isActive = false;
+        InvokeRepeating("LaunchProjectile", 2f, 3f);
+
     }
 
     private void LaunchProjectile()
     {
-         ;
-        GameObject Temporary_Bullet_Handler = Instantiate(Bullet, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-        Rigidbody Temporary_RigidBody;
-        Temporary_RigidBody = Temporary_Bullet_Handler.GetComponent<Rigidbody>();
-        Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
+        if (GameManager.GetState() == GameState.Play)
+        {
+            GameObject Temporary_Bullet_Handler = Instantiate(_manager.paintBombPrefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+            Rigidbody Temporary_RigidBody;
+            Temporary_RigidBody = Temporary_Bullet_Handler.GetComponent<Rigidbody>();
+            Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
+        }
     }
 
     // Update is called once per frame
-    private void Update()
+    /*private void Update()
     {
       
 
@@ -49,5 +53,5 @@ public class Shooter : MonoBehaviour
                 CancelInvoke();
             }
         }
-    }
+    }*/
 }

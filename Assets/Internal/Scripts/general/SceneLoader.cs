@@ -15,15 +15,15 @@ public class SceneLoader : Singleton<SceneLoader>
     [SerializeField]
     private AssetReference firstScene;
     [SerializeField]
-    private Image _loadingImage;
-    [SerializeField]
-    private GameObject _canvasLoading;
+    private TextMeshProUGUI _startText;
     private AsyncOperationHandle<SceneInstance> _handle;
     private bool _unloaded;
-    private bool _loading;
+
+    private MenuManager _menuManager { get { return MenuManager.Instance; } }
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        _startText.text = "Loading";
         Application.targetFrameRate = 90;
         if (Unity.XR.Oculus.Performance.TryGetDisplayRefreshRate(out var rate))
         {
@@ -43,13 +43,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
     }
 
-    private void Update()
-    {
-        if (_loading)
-        {
-            _loadingImage.transform.Rotate(0, 0, 50);
-        }
-    }
+    
     void Start()
     {
         FirstLoad();
@@ -57,7 +51,6 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public void FirstLoad()
     {
-        _loading = true;
         Addressables.LoadSceneAsync(firstScene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed += SceneLoadCompleted;
 
     }
@@ -86,12 +79,11 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         if (obj.Status == AsyncOperationStatus.Succeeded)
         {
-            _loading = false;
-            Debug.Log("Successfully loaded scene.");
             _handle = obj;
             _unloaded = false;
             StartCoroutine(ResetCamera());
-            _canvasLoading.SetActive(false);
+            _startText.text = "Start";
+            GameManager._loaded = true;
             GameManager.ToMenu();
         }
     }

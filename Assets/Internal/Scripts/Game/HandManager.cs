@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class HandManager : MonoBehaviour
+public class HandManager : Singleton<HandManager>
 {
     [SerializeField] private GameObject[] _hands;
     private bool _active;
     private XRRayInteractor _xrray;
     private LineRenderer _linerender;
     private XRInteractorLineVisual _xrLineVis;
-    private void Update()
+    /*private void Update()
     {
         if (GameManager.GetState() == GameState.Menu)
         {
@@ -29,9 +29,10 @@ public class HandManager : MonoBehaviour
             }
         }
     }
+    */
 
 
-    private void SetHandStatus(bool active)
+    public void SetHandStatus(bool active)
     {
         foreach (GameObject hand in _hands)
         {

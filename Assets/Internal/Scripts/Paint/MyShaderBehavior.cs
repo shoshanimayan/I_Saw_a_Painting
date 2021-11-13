@@ -33,9 +33,9 @@ public class MyShaderBehavior : MonoBehaviour
         if (null != _material)
         {
             _texture = new Texture2D(textureSize, textureSize);
-            for (int x = 0; x < textureSize; ++x)
-                for (int y = 0; y < textureSize; ++y)
-                    _texture.SetPixel(x, y, _color);
+            //for (int x = 0; x < textureSize; ++x)
+            //    for (int y = 0; y < textureSize; ++y)
+             //       _texture.SetPixel(x, y, _color);
             _texture.Apply();
             _material.SetTexture("_DrawingTex", _texture);
             _isEnabled = true;
@@ -54,9 +54,9 @@ public class MyShaderBehavior : MonoBehaviour
         if (null != _material)
         {
             _texture = new Texture2D(textureSize, textureSize);
-            for (int x = 0; x < textureSize; ++x)
-                for (int y = 0; y < textureSize; ++y)
-                    _texture.SetPixel(x, y, _color);
+          //  for (int x = 0; x < textureSize; ++x)
+             //   for (int y = 0; y < textureSize; ++y)
+              //      _texture.SetPixel(x, y, _color);
             _texture.Apply();
             _material.SetTexture("_DrawingTex", _texture);
             _isEnabled = true;

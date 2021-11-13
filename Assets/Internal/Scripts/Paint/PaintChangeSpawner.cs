@@ -15,8 +15,13 @@ public class PaintChangeSpawner : MonoBehaviour
     {
         _colorChangeObject.gameObject.SetActive(false);
     }
+
+    private void Start()
+    {
+        InvokeRepeating("SpawnColorObject", 2f, 8f);
+    }
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (GameManager.GetState() == GameState.Play)
         {
@@ -36,14 +41,20 @@ public class PaintChangeSpawner : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
     private void SpawnColorObject()
     {
-        if (!_colorChangeObject.gameObject.activeSelf) { _colorChangeObject.gameObject.SetActive(true); }
-        Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, size.y), Random.Range(-size.z / 2, size.z / 2));
-        _colorChangeObject.SetColor(GetRandomColor());
-        _colorChangeObject.transform.position = pos;
+        if (GameManager.GetState() == GameState.Play)
+        {
+            if (!_colorChangeObject.gameObject.activeSelf) { _colorChangeObject.gameObject.SetActive(true); }
+            Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, size.y), Random.Range(-size.z / 2, size.z / 2));
+            _colorChangeObject.SetColor(GetRandomColor());
+            _colorChangeObject.transform.position = pos;
+        }
+        else {
+            if (_colorChangeObject.gameObject.activeSelf) { _colorChangeObject.gameObject.SetActive(false); }
+        }
 
     }
 
