@@ -13,11 +13,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float Bullet_Forward_Force;
 
 
-    private bool _isActive;
 
     private void Start()
     {
-        _isActive = false;
         InvokeRepeating("LaunchProjectile", 2f, 3f);
 
     }
@@ -33,25 +31,5 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    /*private void Update()
-    {
-      
-
-        if (GameManager.GetState() == GameState.Play)
-        {
-            if (!_isActive) 
-            {
-                _isActive = true;
-                InvokeRepeating("LaunchProjectile", 2f, 3f);
-            }
-        }
-        else {
-            if (_isActive)
-            {
-                _isActive = false;
-                CancelInvoke();
-            }
-        }
-    }*/
+    
 }

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AutoPaintManager : MonoBehaviour
+using Firebase;
+using Firebase.Extensions;
+using Firebase.Database;
+public class AutoPaintManager : Singleton<AutoPaintManager>
 {
     //need
     /// <summary>
@@ -19,18 +21,44 @@ public class AutoPaintManager : MonoBehaviour
     [SerializeField] private Color _color;
     [SerializeField] private Vector2 _coor;
 
-
-    // Start is called before the first frame update
-    private void Start()
+    public void RetrieveJson(int key)
     {
 
-       // AutoPaint(_name, _coor, _color,_alphaNum);
+        List<SplashInfo> splashes = new List<SplashInfo>(); 
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Paintings/"+(key).ToString())
+            .GetValueAsync().ContinueWithOnMainThread(task => {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError(task.Exception);
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    foreach (DataSnapshot child in snapshot.Children)
+                    {
+                        splashes.Add( JsonUtility.FromJson<SplashInfo>(child.Value.ToString()));
+                    }
+                    StartCoroutine(PaintSplashes(splashes));
+
+                }
+            });
+    }
+
+    private IEnumerator PaintSplashes( List<SplashInfo> splashes)
+    {
+        foreach (SplashInfo splash in splashes)
+        {
+            AutoPaint(splash._name, splash._coordinate, splash._color, splash._alphaNumber);
+            yield return null;
+        }
+        yield return null;
+
     }
 
     private void AutoPaint(string name, Vector2 coordinate, Color color, int alpha)
     {
         GameObject obj = GameObject.Find(name);
-        MyShaderBehavior script = obj.GetComponent<MyShaderBehavior>();
-        script.PaintOnColored(coordinate, _manager.GetProjectileSplash(alpha), color);
+       obj.GetComponent<MyShaderBehavior>().PaintOnColored(coordinate, _manager.GetProjectileSplash(alpha), color);
     }
 }

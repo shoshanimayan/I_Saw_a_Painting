@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RotateOnX : MonoBehaviour
 {
-    private int _direction = 1;
     private Quaternion _origin;
     private bool _active;
     [SerializeField] private int _speed = 25;

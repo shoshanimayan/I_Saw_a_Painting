@@ -20,28 +20,7 @@ public class PaintChangeSpawner : MonoBehaviour
     {
         InvokeRepeating("SpawnColorObject", 2f, 8f);
     }
-    // Update is called once per frame
-    /*void Update()
-    {
-        if (GameManager.GetState() == GameState.Play)
-        {
-            if (!_active)
-            {
-                _active = true;
-                InvokeRepeating("SpawnColorObject", 2f, 8f);
-            }
-        }
-        else
-        {
-            if (_active)
-            {
-                _active = false;
-                _colorChangeObject.gameObject.SetActive(false);
-                CancelInvoke();
-            }
-        }
 
-    }*/
 
     private void SpawnColorObject()
     {

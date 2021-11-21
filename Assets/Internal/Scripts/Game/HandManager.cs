@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-
+using Firebase;
+using Firebase.Extensions;
+using Firebase.Database;
 public class HandManager : Singleton<HandManager>
 {
     [SerializeField] private GameObject[] _hands;
@@ -10,26 +12,6 @@ public class HandManager : Singleton<HandManager>
     private XRRayInteractor _xrray;
     private LineRenderer _linerender;
     private XRInteractorLineVisual _xrLineVis;
-    /*private void Update()
-    {
-        if (GameManager.GetState() == GameState.Menu)
-        {
-            if (!_active)
-            {
-                SetHandStatus(true);
-                _active = true;
-            }
-        }
-        else
-        {
-            if (_active)
-            {
-                SetHandStatus(false);
-                _active = false;
-            }
-        }
-    }
-    */
 
 
     public void SetHandStatus(bool active)

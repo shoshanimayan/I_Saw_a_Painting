@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-
+using Firebase;
+using Firebase.Extensions;
+using Firebase.Database;
 public enum GameState {Menu,Play,Auto,None }
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class GameManager : MonoBehaviour
     private static GameState _State;
     private static HandManager _handManager { get { return HandManager.Instance; } }
     private static MenuManager _menuManager { get { return MenuManager.Instance; } }
+    private static AudioManager _audioManager { get { return AudioManager.Instance; } }
+
+    private static AutoPaintManager _autoManager { get { return AutoPaintManager.Instance; } }
+    private static int _currentIndex=-1;
     public static bool _loaded;
     private void Awake()
     {
@@ -25,6 +31,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private static void SendJsonInfo() 
+    {
+
+        if (_currentIndex != -1 &&_recording.Count>0)
+        {
+            Debug.Log(_currentIndex);
+            Debug.Log((_currentIndex + 1).ToString());
+
+            FirebaseDatabase.DefaultInstance
+             .GetReference("Paintings").Child((_currentIndex+1).ToString()).SetValueAsync(_recording.ToArray()).ContinueWithOnMainThread(task => {
+                 if (task.IsFaulted)
+                 {
+                     Debug.LogError(task.Exception);
+                     _recording.Clear();
+                 }
+                 else if (task.IsCompleted)
+                 {
+                     _currentIndex++;
+                 }
+             });
+        }
+    }
 
     public static void AddSplash(string splashInfo)
     {
@@ -32,10 +60,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+
     public static void ToMenu()
     {
+        if (_State == GameState.Play)
+        {
+            SendJsonInfo();
+        }
         _State = GameState.Menu;
-        _recording.Clear();
         FindObjectOfType<XRRig>().transform.eulerAngles = Vector3.zero;
         _handManager.SetHandStatus(true);
         _menuManager.SetMenu(true);
@@ -44,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public static void PlayGame()
     {
+        _audioManager.PlayClip("press");
         ResetMaterials();
         _handManager.SetHandStatus(false);
         _menuManager.SetMenu(false);
@@ -51,18 +85,29 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void PlayRecord()
+    public static void PlayRecord(int key)
     {
+        _audioManager.PlayClip("press");
         ResetMaterials();
         _handManager.SetHandStatus(false);
         _menuManager.SetMenu(false);
         _State = GameState.Auto;
+        _autoManager.RetrieveJson(key);
+
 
     }
 
     public static GameState GetState()
     {
         return _State;
+    }
+
+    public static void SetIndex(int index) 
+    {
+        if (_currentIndex < index)
+        {
+            _currentIndex = index;
+        }
     }
 
     
