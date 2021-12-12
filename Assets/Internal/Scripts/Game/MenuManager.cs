@@ -14,6 +14,8 @@ public class MenuManager : Singleton<MenuManager>
 {
     [SerializeField] private GameObject _menus;
     [SerializeField] private TextMeshProUGUI _loadingText;
+    [SerializeField] private TextMeshProUGUI _titleText;
+
     [SerializeField] private GameObject _ScrollContent;
     [SerializeField] private GameObject _ScrollButtonPrefab;
     [SerializeField] InputActionReference controllerActionGrip;
@@ -39,7 +41,11 @@ public class MenuManager : Singleton<MenuManager>
             GameManager.PlayGame();
         }
     }
-   
+
+    public void SetTitle(string title)
+    {
+        _titleText.text = "Uploaded " + title;
+    }
 
     public void RunAuto(int key)
     {

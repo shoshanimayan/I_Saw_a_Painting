@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
                  }
                  else if (task.IsCompleted)
                  {
+                     _menuManager.SetTitle( (_currentIndex).ToString());
                      _currentIndex++;
                  }
              });
