@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private static HandManager _handManager { get { return HandManager.Instance; } }
     private static MenuManager _menuManager { get { return MenuManager.Instance; } }
     private static AudioManager _audioManager { get { return AudioManager.Instance; } }
-
+    private static PaintProjectileManager _paintManager { get { return PaintProjectileManager.Instance; } }
     private static AutoPaintManager _autoManager { get { return AutoPaintManager.Instance; } }
     private static int _currentIndex=-1;
     public static bool _loaded;
@@ -76,12 +76,14 @@ public class GameManager : MonoBehaviour
 
     public static void PlayGame()
     {
+        _paintManager.paintBombColor = Color.red;
         _audioManager.PlayMainTheme();
         _audioManager.PlayClip("press");
         ResetMaterials();
         _handManager.SetHandStatus(false);
         _menuManager.SetMenu(false);
         _State = GameState.Play;
+
 
     }
 

@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 12392937}
   - component: {fileID: 12392936}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2439,7 +2439,7 @@ GameObject:
   - component: {fileID: 569836270}
   - component: {fileID: 569836269}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4295,7 +4295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menus: {fileID: 881773817}
   _loadingText: {fileID: 50458549}
-  _titleText: {fileID: 0}
+  _titleText: {fileID: 569836269}
   _ScrollContent: {fileID: 390093047}
   _ScrollButtonPrefab: {fileID: 7724854557938797179, guid: 1b352b2f60f032245ac541275ba1aa52, type: 3}
   controllerActionGrip: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
