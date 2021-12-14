@@ -33,6 +33,6 @@ public class AudioManager : Singleton<AudioManager>
     }
     public void StopMainTheme()
     {
-        _as.Pause();
+        _as.Stop();
     }
 }

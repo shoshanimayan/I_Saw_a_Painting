@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     public static void PlayRecord(int key)
     {
+        _audioManager.PlayMainTheme();
         _audioManager.PlayClip("press");
         ResetMaterials();
         _handManager.SetHandStatus(false);
