@@ -9,8 +9,8 @@ public class PaintChangeSpawner : MonoBehaviour
     [SerializeField] private Vector3 center;
     [SerializeField] private Vector3 size;
     [SerializeField] private PaintChangeObjectBehavior _colorChangeObject;
+    private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
     private int _lastColorIndex = -1;
-    private bool _active;
     private void Awake()
     {
         _colorChangeObject.gameObject.SetActive(false);
@@ -32,7 +32,10 @@ public class PaintChangeSpawner : MonoBehaviour
             _colorChangeObject.transform.position = pos;
         }
         else {
-            if (_colorChangeObject.gameObject.activeSelf) { _colorChangeObject.gameObject.SetActive(false); }
+            if (_colorChangeObject.gameObject.activeSelf) 
+            { 
+                _colorChangeObject.gameObject.SetActive(false);
+            }
         }
 
     }
@@ -40,11 +43,10 @@ public class PaintChangeSpawner : MonoBehaviour
     private Color GetRandomColor()
     {
         int colorIndex= Random.Range(0, _colors.Length);
-        while (colorIndex == _lastColorIndex)
+        while (colorIndex != _lastColorIndex && _colors[colorIndex]== _manager.paintBombColor)
         {
             colorIndex = Random.Range(0, _colors.Length);
         }
-        _lastColorIndex = colorIndex;
         return _colors[colorIndex];
 
     }

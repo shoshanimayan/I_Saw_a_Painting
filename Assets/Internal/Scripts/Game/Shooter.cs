@@ -6,7 +6,9 @@ public class Shooter : MonoBehaviour
 {
 
 
-
+    [SerializeField] private float _timerTime;
+    private float _currentTime;
+    private bool _active;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
 
     //Enter the Speed of the Bullet from the Component Inspector.
@@ -14,12 +16,31 @@ public class Shooter : MonoBehaviour
 
 
 
-    private void Start()
+    
+
+    private void FixedUpdate()
     {
-        InvokeRepeating("LaunchProjectile", 2f, 3f);
-
+        if (_active)
+        {
+            if (_currentTime <= _timerTime)
+            {
+                _currentTime += Time.fixedDeltaTime;
+            }
+            else
+            {
+                LaunchProjectile();
+                _currentTime = 0;
+            }
+        }
+        else
+        {
+            if (GameManager.GetState() == GameState.Play && !_active)
+            {
+                _active = true;
+                _currentTime = 0;
+            }
+        }
     }
-
     private void LaunchProjectile()
     {
         if (GameManager.GetState() == GameState.Play)

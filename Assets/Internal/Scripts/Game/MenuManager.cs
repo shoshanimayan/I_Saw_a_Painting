@@ -44,7 +44,8 @@ public class MenuManager : Singleton<MenuManager>
 
     public void SetTitle(string title)
     {
-        _titleText.text = "Uploaded " + title;
+        _titleText.fontSize = 7;
+        _titleText.text = "Uploaded Painting " + title;
     }
 
     public void RunAuto(int key)
@@ -74,7 +75,6 @@ public class MenuManager : Singleton<MenuManager>
          .GetValueAsync().ContinueWithOnMainThread(task => {
              if (task.IsFaulted)
              {
-                 Debug.LogError(task.Exception);
                  _loadingText.text = "Could Not Connect to Network";
 
 
@@ -85,7 +85,6 @@ public class MenuManager : Singleton<MenuManager>
                  DataSnapshot snapshot = task.Result;
                  _loadingText.gameObject.SetActive(false);
                  GameManager.SetIndex(Convert.ToInt32(snapshot.ChildrenCount));
-                 Debug.Log(Convert.ToInt32(snapshot.ChildrenCount));
                  for (int i = (_ScrollContent.transform.childCount>0? _ScrollContent.transform.childCount:0) ; i < Convert.ToInt32(snapshot.ChildrenCount); i++)
                  { 
                     GameObject _button = Instantiate(_ScrollButtonPrefab, new Vector3(0, 0, 0), _ScrollContent.transform.rotation, _ScrollContent.transform);

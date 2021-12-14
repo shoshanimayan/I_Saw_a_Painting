@@ -4119,7 +4119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab762cc61bc39364c8e7b8d665e05d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet_Forward_Force: 10
+  _timerTime: 4.5
+  Bullet_Forward_Force: 20
 --- !u!1 &1826469750
 GameObject:
   m_ObjectHideFlags: 0
