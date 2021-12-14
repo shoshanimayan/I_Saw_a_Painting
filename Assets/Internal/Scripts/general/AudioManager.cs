@@ -7,10 +7,12 @@ public class AudioManager : Singleton<AudioManager>
 
     [SerializeField] AudioClip[] _audioClips;
     private AudioSource _as;
+    private AudioSource _asCamera;
 
     private void Awake()
     {
         _as = GetComponent<AudioSource>();
+        _asCamera = Camera.main.gameObject.GetComponent<AudioSource>();
     }
 
     public void PlayClip(string name)
@@ -19,9 +21,18 @@ public class AudioManager : Singleton<AudioManager>
         {
             if (clip.name == name)
             {
-                _as.PlayOneShot(clip);
+                _asCamera.PlayOneShot(clip);
             }
         }
     
+    }
+
+    public void PlayMainTheme()
+    {
+        _as.Play();
+    }
+    public void StopMainTheme()
+    {
+        _as.Pause();
     }
 }

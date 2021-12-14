@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public static void ToMenu()
     {
+        _audioManager.StopMainTheme();
         if (_State == GameState.Play)
         {
             SendJsonInfo();
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     public static void PlayGame()
     {
+        _audioManager.PlayMainTheme();
         _audioManager.PlayClip("press");
         ResetMaterials();
         _handManager.SetHandStatus(false);
