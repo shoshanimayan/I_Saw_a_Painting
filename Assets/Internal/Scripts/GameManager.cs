@@ -36,14 +36,11 @@ public class GameManager : MonoBehaviour
 
         if (_currentIndex != -1 &&_recording.Count>0)
         {
-            Debug.Log(_currentIndex);
-            Debug.Log((_currentIndex + 1).ToString());
 
             FirebaseDatabase.DefaultInstance
              .GetReference("Paintings").Child((_currentIndex+1).ToString()).SetValueAsync(_recording.ToArray()).ContinueWithOnMainThread(task => {
                  if (task.IsFaulted)
                  {
-                     Debug.LogError(task.Exception);
                      _recording.Clear();
                  }
                  else if (task.IsCompleted)
