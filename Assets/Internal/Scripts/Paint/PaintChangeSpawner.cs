@@ -43,7 +43,7 @@ public class PaintChangeSpawner : MonoBehaviour
     private Color GetRandomColor()
     {
         int colorIndex= Random.Range(0, _colors.Length);
-        while (colorIndex != _lastColorIndex && _colors[colorIndex]== _manager.paintBombColor)
+        while ((colorIndex == _lastColorIndex) && (_colors[colorIndex]== _manager.paintBombColor))
         {
             colorIndex = Random.Range(0, _colors.Length);
         }
