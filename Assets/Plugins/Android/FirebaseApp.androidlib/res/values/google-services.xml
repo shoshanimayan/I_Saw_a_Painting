@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
-  <string name="firebase_database_url" translatable="false">https://isawapainting-6fe6c-default-rtdb.firebaseio.com</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://isawapainting-6fe6c-default-rtdb.firebaseio.com/</string>
   <string name="gcm_defaultSenderId" translatable="false">462549841803</string>
   <string name="google_storage_bucket" translatable="false">isawapainting-6fe6c.appspot.com</string>
   <string name="project_id" translatable="false">isawapainting-6fe6c</string>
   <string name="google_api_key" translatable="false">AIzaSyCdveuZwFo8RmZJURyWp6m2rSJCt5oXvEM</string>
   <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCdveuZwFo8RmZJURyWp6m2rSJCt5oXvEM</string>
-  <string name="google_app_id" translatable="false">1:462549841803:android:d4073f1730721799c9a18e</string>
-  <string name="default_android_client_id" translatable="false">462549841803-avq8807matnd678iuh550lrptc4laph7.apps.googleusercontent.com</string>
+  <string name="google_app_id" translatable="false">1:462549841803:android:96c45730931cd33ec9a18e</string>
   <string name="default_web_client_id" translatable="false">462549841803-lee81fkflhcns4ps6crubqlekdj72qum.apps.googleusercontent.com</string>
 </resources>

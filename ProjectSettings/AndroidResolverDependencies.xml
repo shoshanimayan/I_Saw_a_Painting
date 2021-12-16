@@ -69,7 +69,7 @@
   </files>
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.Painting.I_Saw_A_Painting" />
+    <setting name="bundleId" value="com.MayanShoshani.I_Saw_A_Painting" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="False" />
