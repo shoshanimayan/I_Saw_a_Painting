@@ -60,7 +60,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         yield return new WaitForEndOfFrame();
 
-        FindObjectOfType<XRRig>().transform.eulerAngles = Vector3.zero;
+        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0,180,0);
     }
 
     // Start is called before the first frame update
