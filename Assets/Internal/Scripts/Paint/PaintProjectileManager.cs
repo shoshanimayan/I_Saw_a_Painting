@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class PaintProjectileManager : Singleton<PaintProjectileManager>
 {
-    public ParticleSystem burstParticlePrefab;
-    public GameObject paintBombPrefab;
-    public Color paintBombColor = Color.black;
+
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
+
     [SerializeField] private  Texture2D[] projectileSplashTextures;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
 
     private List<float[,]> _projSplashTextures;
     private int _projSplashTexturesCount;
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
 
     private void Awake()
     {
@@ -37,6 +47,14 @@ public class PaintProjectileManager : Singleton<PaintProjectileManager>
             _projSplashTextures.Add(textureAlphas);
         }
     }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
+    
+    public ParticleSystem burstParticlePrefab;
+    public GameObject paintBombPrefab;
+    public Color paintBombColor = Color.black;
 
     public float[,] GetRandomProjectileSplash()
     {

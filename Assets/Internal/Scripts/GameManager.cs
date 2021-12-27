@@ -8,7 +8,10 @@ using Firebase.Database;
 public enum GameState {Menu,Play,Auto,None }
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
+
     private static List<string> _recording= new List<string>();
     private static GameState _State;
     private static HandManager _handManager { get { return HandManager.Instance; } }
@@ -18,6 +21,11 @@ public class GameManager : MonoBehaviour
     private static AutoPaintManager _autoManager { get { return AutoPaintManager.Instance; } }
     private static int _currentIndex=-1;
     public static bool _loaded;
+
+     ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
+
     private void Awake()
     {
         _State = GameState.Menu;
@@ -51,6 +59,10 @@ public class GameManager : MonoBehaviour
              });
         }
     }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
 
     public static void AddSplash(string splashInfo)
     {

@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//////////////////
+//  PUBLIC API  //
+/////////////////
 public class SplashInfo
 {
+
+
+
     public string _name;
     public Vector2 _coordinate;
     public Color _color;
@@ -20,11 +27,18 @@ public class SplashInfo
 
 public class PaintProjectileBehavior : MonoBehaviour
 {
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     public float paintDiameter = 1.5f;
-    
     private bool _isActive = false;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
     private AudioManager _audioManager { get { return AudioManager.Instance; } }
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
 
     private void Start()
     {
@@ -39,7 +53,9 @@ public class PaintProjectileBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!_isActive)
+        {
             return;
+        }
         _isActive = false;
         Destroy(gameObject);
         ParticleSystem burstParticle = Instantiate(_manager.burstParticlePrefab);
@@ -57,8 +73,6 @@ public class PaintProjectileBehavior : MonoBehaviour
         burstSettings.startColor = _manager.paintBombColor;
         burstParticle.Play();
         _audioManager.PlayClip("splat");
-
-
 
         for (int i = 0; i < 14; ++i)
         {
@@ -79,10 +93,6 @@ public class PaintProjectileBehavior : MonoBehaviour
                 }
             }
         }
-
-
-
-
 
     }
 }

@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class MoveUpDown : MonoBehaviour
 {
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField] private float _topY;
     [SerializeField] private float _speed=5;
-     private Vector3 _top;
 
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
+    private Vector3 _top;
     private Vector3 _origin;
     private bool _up;
     private bool _active;
-    void Start()
+
+
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
+
+    private void Start()
     {
         _origin = transform.position;
         _top = new Vector3(transform.position.x, _topY, transform.position.z);
@@ -19,8 +32,7 @@ public class MoveUpDown : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
         if (GameManager.GetState() != GameState.Menu)

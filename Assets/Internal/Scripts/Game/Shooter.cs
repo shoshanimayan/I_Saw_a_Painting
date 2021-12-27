@@ -5,19 +5,24 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
 
-
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField] private float _timerTime;
+    [SerializeField] private float Bullet_Forward_Force;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
+
     private float _currentTime;
     private bool _active;
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
 
-    //Enter the Speed of the Bullet from the Component Inspector.
-    [SerializeField] private float Bullet_Forward_Force;
-
-
-
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
     
-
     private void FixedUpdate()
     {
         if (_active)

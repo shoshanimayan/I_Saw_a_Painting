@@ -12,15 +12,23 @@ using UnityEngine.UI;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField]
     private AssetReference firstScene;
     [SerializeField]
     private TextMeshProUGUI _startText;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     private AsyncOperationHandle<SceneInstance> _handle;
     private bool _unloaded;
 
-    private MenuManager _menuManager { get { return MenuManager.Instance; } }
-
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
     private void Awake()
     {
         _startText.text = "Loading";
@@ -44,35 +52,9 @@ public class SceneLoader : Singleton<SceneLoader>
     }
 
     
-    void Start()
+    private void Start()
     {
         FirstLoad();
-    }
-
-    public void FirstLoad()
-    {
-        Addressables.LoadSceneAsync(firstScene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed += SceneLoadCompleted;
-
-    }
-
-    public IEnumerator ResetCamera()
-    {
-
-        yield return new WaitForEndOfFrame();
-
-        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0,180,0);
-    }
-
-    // Start is called before the first frame update
-    public void Load(AssetReference scene)
-    {
-        Debug.Log("loading level");
-        if (!_unloaded)
-        {
-            _unloaded = true;
-            UnloadScene();
-        }
-        Addressables.LoadSceneAsync(scene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed += SceneLoadCompleted;
     }
 
     private void SceneLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
@@ -104,4 +86,35 @@ public class SceneLoader : Singleton<SceneLoader>
             }
         };
     }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
+
+    public void FirstLoad()
+    {
+        Addressables.LoadSceneAsync(firstScene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed += SceneLoadCompleted;
+
+    }
+
+    public IEnumerator ResetCamera()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0,180,0);
+    }
+
+    public void Load(AssetReference scene)
+    {
+        Debug.Log("loading level");
+        if (!_unloaded)
+        {
+            _unloaded = true;
+            UnloadScene();
+        }
+        Addressables.LoadSceneAsync(scene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed += SceneLoadCompleted;
+    }
+
+    
 }

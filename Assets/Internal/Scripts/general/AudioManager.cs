@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField] AudioClip[] _audioClips;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     private AudioSource _as;
     private AudioSource _asCamera;
 
@@ -14,6 +20,10 @@ public class AudioManager : Singleton<AudioManager>
         _as = GetComponent<AudioSource>();
         _asCamera = Camera.main.gameObject.GetComponent<AudioSource>();
     }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
 
     public void PlayClip(string name)
     {

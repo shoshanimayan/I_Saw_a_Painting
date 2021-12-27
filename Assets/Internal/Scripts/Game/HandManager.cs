@@ -7,13 +7,23 @@ using Firebase.Extensions;
 using Firebase.Database;
 public class HandManager : Singleton<HandManager>
 {
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
+    
     [SerializeField] private GameObject[] _hands;
-    private bool _active;
+
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     private XRRayInteractor _xrray;
     private LineRenderer _linerender;
     private XRInteractorLineVisual _xrLineVis;
 
-
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
     public void SetHandStatus(bool active)
     {
         foreach (GameObject hand in _hands)

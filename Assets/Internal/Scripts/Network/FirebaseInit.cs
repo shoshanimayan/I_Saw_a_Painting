@@ -8,8 +8,14 @@ using UnityEngine.Events;
 
 public class FirebaseInit : MonoBehaviour
 {
-    //public UnityEvent OnFirebaseInitialized = new UnityEvent();
-    void Start()
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
+    /// <summary>
+    /// initaliaze connection to firebase database
+    /// </summary>
+    private void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {

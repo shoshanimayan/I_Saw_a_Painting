@@ -4,13 +4,31 @@ using UnityEngine;
 
 public class PaintChangeObjectBehavior : MonoBehaviour
 {
+
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
+
     [SerializeField] private Color _color;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
 
     private void Start()
     {
         GetComponent<Renderer>().material.SetColor("_Color", _color);
     }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
+
     public void SetColor(Color color)
     {
         _color = color;

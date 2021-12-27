@@ -6,44 +6,24 @@ using Firebase.Extensions;
 using Firebase.Database;
 public class AutoPaintManager : Singleton<AutoPaintManager>
 {
-    //need
-    /// <summary>
-    /// need gameobject to get script - get gameobject name
-    /// color
-    ///  texture coordinate vector2 
-    /// number for alpha texture to retrieve
-    /// 
-    /// send json to here, parse, and apply
-    /// </summary>
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
+
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
+
     [SerializeField] private string _name;
     [SerializeField] private int _alphaNum;
     [SerializeField] private Color _color;
     [SerializeField] private Vector2 _coor;
 
-    public void RetrieveJson(int key)
-    {
-
-        List<SplashInfo> splashes = new List<SplashInfo>(); 
-        FirebaseDatabase.DefaultInstance
-            .GetReference("Paintings/"+(key).ToString())
-            .GetValueAsync().ContinueWithOnMainThread(task => {
-                if (task.IsFaulted)
-                {
-                    Debug.LogError(task.Exception);
-                }
-                else if (task.IsCompleted)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    foreach (DataSnapshot child in snapshot.Children)
-                    {
-                        splashes.Add( JsonUtility.FromJson<SplashInfo>(child.Value.ToString()));
-                    }
-                    StartCoroutine(PaintSplashes(splashes));
-
-                }
-            });
-    }
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
 
     private IEnumerator PaintSplashes( List<SplashInfo> splashes)
     {
@@ -60,5 +40,33 @@ public class AutoPaintManager : Singleton<AutoPaintManager>
     {
         GameObject obj = GameObject.Find(name);
        obj.GetComponent<MyShaderBehavior>().PaintOnColored(coordinate, _manager.GetProjectileSplash(alpha), color);
+    }
+
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
+
+    public void RetrieveJson(int key)
+    {
+
+        List<SplashInfo> splashes = new List<SplashInfo>();
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Paintings/" + (key).ToString())
+            .GetValueAsync().ContinueWithOnMainThread(task => {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError(task.Exception);
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    foreach (DataSnapshot child in snapshot.Children)
+                    {
+                        splashes.Add(JsonUtility.FromJson<SplashInfo>(child.Value.ToString()));
+                    }
+                    StartCoroutine(PaintSplashes(splashes));
+
+                }
+            });
     }
 }

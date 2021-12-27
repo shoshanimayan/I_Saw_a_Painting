@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class CountDownTimer : MonoBehaviour
 {
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField] private float _timerTime;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
+
     private float _currentTime;
     private bool _active;
 
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
     private void EndTimer()
     {
         GameManager.ToMenu();
@@ -38,7 +49,9 @@ public class CountDownTimer : MonoBehaviour
         }
     }
 
-
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
     public void StartTimer()
     {
         _currentTime = 0;

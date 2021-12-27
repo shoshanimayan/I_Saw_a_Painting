@@ -12,6 +12,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 public class MenuManager : Singleton<MenuManager>
 {
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
+
     [SerializeField] private GameObject _menus;
     [SerializeField] private TextMeshProUGUI _loadingText;
     [SerializeField] private TextMeshProUGUI _titleText;
@@ -20,43 +24,15 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private GameObject _ScrollButtonPrefab;
     [SerializeField] InputActionReference controllerActionGrip;
 
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
     private void Awake()
     {
         controllerActionGrip.action.started += EndPlayManual;
     }
 
-    public void SetMenu(bool enabled)
-    {
-        _menus.SetActive(enabled);
-        if (enabled)
-        {
-            SetAutoMenu();
-        }
-    }
-
-    public void Play()
-    {
-        if (GameManager._loaded)
-        {
-            GameManager.PlayGame();
-        }
-    }
-
-    public void SetTitle(string title)
-    {
-        _titleText.fontSize = 7;
-        _titleText.text = "Uploaded Painting " + title;
-    }
-
-    public void RunAuto(int key)
-    {
-        GameManager.PlayRecord(key);
-    }
-
-    public void EndGame()
-    {
-        GameManager.ToMenu();
-    }
+    
 
     private void EndPlayManual(InputAction.CallbackContext context)
     {
@@ -98,6 +74,42 @@ public class MenuManager : Singleton<MenuManager>
     }
 
 
+    //////////////////
+    //  PUBLIC API  //
+    /////////////////
+
+    public void SetMenu(bool enabled)
+    {
+        _menus.SetActive(enabled);
+        if (enabled)
+        {
+            SetAutoMenu();
+        }
+    }
+
+    public void Play()
+    {
+        if (GameManager._loaded)
+        {
+            GameManager.PlayGame();
+        }
+    }
+
+    public void SetTitle(string title)
+    {
+        _titleText.fontSize = 7;
+        _titleText.text = "Uploaded Painting " + title;
+    }
+
+    public void RunAuto(int key)
+    {
+        GameManager.PlayRecord(key);
+    }
+
+    public void EndGame()
+    {
+        GameManager.ToMenu();
+    }
 
     public void QuitApplication()
     {

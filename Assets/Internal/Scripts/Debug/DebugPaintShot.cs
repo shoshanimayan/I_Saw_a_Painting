@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class DebugPaintShot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    ///////////////////////
+    //  PRIVATE METHODS  //
+    ///////////////////////
+    private void Start()
     {
         GetComponent<Rigidbody>().useGravity = false;  
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * 10;
 

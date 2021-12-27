@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PaintChangeSpawner : MonoBehaviour
 {
-
+    /////////////////////////
+    // INSPECTOR VARIABLES //
+    /////////////////////////
     [SerializeField] private Color[] _colors;
     [SerializeField] private Vector3 center;
     [SerializeField] private Vector3 size;
     [SerializeField] private PaintChangeObjectBehavior _colorChangeObject;
+
+    /////////////////////////
+    //  PRIVATE VARIABLES  //
+    /////////////////////////
+
     private PaintProjectileManager _manager { get { return PaintProjectileManager.Instance; } }
     private int _lastColorIndex = -1;
     private void Awake()
