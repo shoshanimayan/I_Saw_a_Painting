@@ -9,7 +9,8 @@ using System.Linq;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using UnityEngine.UI;
-
+using UnityEngine.XR.Management;
+using UnityEngine.XR;
 public class SceneLoader : Singleton<SceneLoader>
 {
     /////////////////////////
@@ -25,6 +26,7 @@ public class SceneLoader : Singleton<SceneLoader>
     /////////////////////////
     private AsyncOperationHandle<SceneInstance> _handle;
     private bool _unloaded;
+    private XRLoader _xrLoader;
 
     ///////////////////////
     //  PRIVATE METHODS  //
@@ -51,11 +53,32 @@ public class SceneLoader : Singleton<SceneLoader>
         }
     }
 
-    
     private void Start()
     {
+        var xrSettings = XRGeneralSettings.Instance;
+        if (xrSettings == null)
+        {
+            Debug.Log($"XRGeneralSettings is null.");
+            return;
+        }
+        var xrManager = xrSettings.Manager;
+        if (xrManager == null)
+        {
+            Debug.Log($"XRManagerSettings is null.");
+            return;
+        }
+
+        _xrLoader = xrManager.activeLoader;
+        if (_xrLoader == null)
+        {
+            Debug.Log($"XRLoader is null.");
+            return;
+        }
         FirstLoad();
+
     }
+
+    
 
     private void SceneLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
     {
@@ -69,8 +92,6 @@ public class SceneLoader : Singleton<SceneLoader>
             GameManager.ToMenu();
         }
     }
-
-
 
     private void UnloadScene()
     {
@@ -101,8 +122,15 @@ public class SceneLoader : Singleton<SceneLoader>
     {
 
         yield return new WaitForEndOfFrame();
+        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0, 0, 0);
+        FindObjectOfType<XRRig>().transform.position = new Vector3(0, 0, 0);
+        var xrInput = _xrLoader.GetLoadedSubsystem<XRInputSubsystem>();
 
-        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0,180,0);
+        if (xrInput != null)
+        {
+            xrInput.TrySetTrackingOriginMode(TrackingOriginModeFlags.Device);
+            xrInput.TryRecenter();
+        }
     }
 
     public void Load(AssetReference scene)

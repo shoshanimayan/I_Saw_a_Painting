@@ -48,7 +48,7 @@ public class AutoPaintManager : Singleton<AutoPaintManager>
 
     public void RetrieveJson(int key)
     {
-
+        Debug.Log(key);
         List<SplashInfo> splashes = new List<SplashInfo>();
         FirebaseDatabase.DefaultInstance
             .GetReference("Paintings/" + (key).ToString())
@@ -59,10 +59,14 @@ public class AutoPaintManager : Singleton<AutoPaintManager>
                 }
                 else if (task.IsCompleted)
                 {
+                  //  Debug.Log(task.Result.Key);
                     DataSnapshot snapshot = task.Result;
+                  //  Debug.Log(snapshot.GetRawJsonValue());(
+                  //  Debug.Log(snapshot.Reference.ToString())
                     foreach (DataSnapshot child in snapshot.Children)
                     {
                         splashes.Add(JsonUtility.FromJson<SplashInfo>(child.Value.ToString()));
+                     //   Debug.Log(child.Value.ToString());
                     }
                     StartCoroutine(PaintSplashes(splashes));
 

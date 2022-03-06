@@ -3519,7 +3519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3880,7 +3880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4329,13 +4329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050f242b6230e6f40872fc428885adc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burstParticlePrefab: {fileID: 198290609325543824, guid: 1ce9d4437500c4f499597d69b0e26f26, type: 3}
-  paintBombPrefab: {fileID: 1090240162405762, guid: dbd018f84a9d7a74fa67e90cd4ccc3ec, type: 3}
-  paintBombColor: {r: 1, g: 0, b: 0, a: 1}
   projectileSplashTextures:
   - {fileID: 2800000, guid: 8ce5933ca1ad2c44c82d823bb741f620, type: 3}
   - {fileID: 2800000, guid: 1bf0c5dc5f2b8f144b77b286d87d2555, type: 3}
   - {fileID: 2800000, guid: 5b2a9a4cdd04b9842b7d18da75fcd408, type: 3}
+  burstParticlePrefab: {fileID: 198290609325543824, guid: 1ce9d4437500c4f499597d69b0e26f26, type: 3}
+  paintBombPrefab: {fileID: 1090240162405762, guid: dbd018f84a9d7a74fa67e90cd4ccc3ec, type: 3}
+  paintBombColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &1975393143
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ public class MenuManager : Singleton<MenuManager>
 
     }
 
+   
     private void SetAutoMenu()
     {
 
@@ -61,12 +62,19 @@ public class MenuManager : Singleton<MenuManager>
                  DataSnapshot snapshot = task.Result;
                  _loadingText.gameObject.SetActive(false);
                  GameManager.SetIndex(Convert.ToInt32(snapshot.ChildrenCount));
+                 List<int> nums = new List<int>();
                  for (int i = (_ScrollContent.transform.childCount>0? _ScrollContent.transform.childCount:0) ; i < Convert.ToInt32(snapshot.ChildrenCount); i++)
-                 { 
-                    GameObject _button = Instantiate(_ScrollButtonPrefab, new Vector3(0, 0, 0), _ScrollContent.transform.rotation, _ScrollContent.transform);
-                     _button.GetComponent<RectTransform>().localPosition = new Vector3(_button.GetComponent<RectTransform>().localPosition.x, _button.GetComponent<RectTransform>().localPosition.y,0);
-                     _button.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Painting " + (i+1).ToString();
-                    _button.GetComponent<Button>().onClick.AddListener(delegate {RunAuto(i); });
+                 {
+                     nums.Add(i);
+                    
+                 }
+
+                 foreach (int i in nums.ToArray())
+                 {
+                     GameObject _button = Instantiate(_ScrollButtonPrefab, new Vector3(0, 0, 0), _ScrollContent.transform.rotation, _ScrollContent.transform);
+                     _button.GetComponent<RectTransform>().localPosition = new Vector3(_button.GetComponent<RectTransform>().localPosition.x, _button.GetComponent<RectTransform>().localPosition.y, 0);
+                     _button.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Painting " + (i + 1).ToString();
+                     _button.GetComponent<Button>().onClick.AddListener(delegate { RunAuto(i); });
                  }
 
              }
@@ -103,6 +111,7 @@ public class MenuManager : Singleton<MenuManager>
 
     public void RunAuto(int key)
     {
+        Debug.Log(key);
         GameManager.PlayRecord(key);
     }
 
