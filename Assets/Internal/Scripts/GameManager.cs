@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private static AudioManager _audioManager { get { return AudioManager.Instance; } }
     private static PaintProjectileManager _paintManager { get { return PaintProjectileManager.Instance; } }
     private static AutoPaintManager _autoManager { get { return AutoPaintManager.Instance; } }
+    private static SceneLoader _sceneLoader { get { return SceneLoader.Instance; } }
+
     private static int _currentIndex=-1;
     public static bool _loaded;
 
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     public static void ToMenu()
     {
+        _sceneLoader.CameraReset();
         _audioManager.StopMainTheme();
         if (_State == GameState.Play)
         {
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public static void PlayGame()
     {
+        _sceneLoader.CameraReset();
         _paintManager.paintBombColor = Color.red;
         _audioManager.PlayMainTheme();
         _audioManager.PlayClip("press");
@@ -101,7 +105,8 @@ public class GameManager : MonoBehaviour
 
     public static void PlayRecord(int key)
     {
-        Debug.Log(key);
+        _sceneLoader.CameraReset();
+
         _audioManager.PlayMainTheme();
         _audioManager.PlayClip("press");
         ResetMaterials();

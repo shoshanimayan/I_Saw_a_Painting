@@ -108,6 +108,20 @@ public class SceneLoader : Singleton<SceneLoader>
         };
     }
 
+    private IEnumerator ResetCamera()
+    {
+
+        yield return new WaitForEndOfFrame();
+        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0, 180, 0);
+        FindObjectOfType<XRRig>().transform.position = new Vector3(0, 0, 0);
+        var xrInput = _xrLoader.GetLoadedSubsystem<XRInputSubsystem>();
+
+        if (xrInput != null)
+        {
+            xrInput.TrySetTrackingOriginMode(TrackingOriginModeFlags.Device);
+            xrInput.TryRecenter();
+        }
+    }
     //////////////////
     //  PUBLIC API  //
     /////////////////
@@ -118,19 +132,10 @@ public class SceneLoader : Singleton<SceneLoader>
 
     }
 
-    public IEnumerator ResetCamera()
+    public void CameraReset()
     {
 
-        yield return new WaitForEndOfFrame();
-        FindObjectOfType<XRRig>().transform.eulerAngles = new Vector3(0, 0, 0);
-        FindObjectOfType<XRRig>().transform.position = new Vector3(0, 0, 0);
-        var xrInput = _xrLoader.GetLoadedSubsystem<XRInputSubsystem>();
-
-        if (xrInput != null)
-        {
-            xrInput.TrySetTrackingOriginMode(TrackingOriginModeFlags.Device);
-            xrInput.TryRecenter();
-        }
+        StartCoroutine(ResetCamera());
     }
 
     public void Load(AssetReference scene)
