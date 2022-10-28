@@ -58,20 +58,20 @@ public class SceneLoader : Singleton<SceneLoader>
         var xrSettings = XRGeneralSettings.Instance;
         if (xrSettings == null)
         {
-            Debug.Log($"XRGeneralSettings is null.");
+            Debug.LogError($"XRGeneralSettings is null.");
             return;
         }
         var xrManager = xrSettings.Manager;
         if (xrManager == null)
         {
-            Debug.Log($"XRManagerSettings is null.");
+            Debug.LogError($"XRManagerSettings is null.");
             return;
         }
 
         _xrLoader = xrManager.activeLoader;
         if (_xrLoader == null)
         {
-            Debug.Log($"XRLoader is null.");
+            Debug.LogError($"XRLoader is null.");
             return;
         }
         FirstLoad();

@@ -46,17 +46,21 @@ public class GameManager : MonoBehaviour
 
         if (_currentIndex != -1 &&_recording.Count>0)
         {
-
+            print(_currentIndex+1);
+            print(_recording.Count);
             FirebaseDatabase.DefaultInstance
              .GetReference("Paintings").Child((_currentIndex+1).ToString()).SetValueAsync(_recording.ToArray()).ContinueWithOnMainThread(task => {
                  if (task.IsFaulted)
                  {
+                    print( task.Exception.Message);
                      _recording.Clear();
                  }
                  else if (task.IsCompleted)
                  {
-                     _menuManager.SetTitle( (_currentIndex).ToString());
+                     print("completed");
                      _currentIndex++;
+                     _menuManager.SetTitle((_currentIndex).ToString());
+
                  }
              });
         }

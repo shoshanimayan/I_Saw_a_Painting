@@ -62,8 +62,9 @@ public class MenuManager : Singleton<MenuManager>
                  DataSnapshot snapshot = task.Result;
                  _loadingText.gameObject.SetActive(false);
                  GameManager.SetIndex(Convert.ToInt32(snapshot.ChildrenCount));
+                 print(Convert.ToInt32(snapshot.ChildrenCount));
                  List<int> nums = new List<int>();
-                 for (int i = (_ScrollContent.transform.childCount>0? _ScrollContent.transform.childCount:0) ; i < Convert.ToInt32(snapshot.ChildrenCount); i++)
+                 for (int i = (_ScrollContent.transform.childCount>0? _ScrollContent.transform.childCount:1) ; i <= Convert.ToInt32(snapshot.ChildrenCount); i++)
                  {
                      nums.Add(i);
                     
@@ -73,7 +74,7 @@ public class MenuManager : Singleton<MenuManager>
                  {
                      GameObject _button = Instantiate(_ScrollButtonPrefab, new Vector3(0, 0, 0), _ScrollContent.transform.rotation, _ScrollContent.transform);
                      _button.GetComponent<RectTransform>().localPosition = new Vector3(_button.GetComponent<RectTransform>().localPosition.x, _button.GetComponent<RectTransform>().localPosition.y, 0);
-                     _button.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Painting " + (i + 1).ToString();
+                     _button.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Painting " + (i ).ToString();
                      _button.GetComponent<Button>().onClick.AddListener(delegate { RunAuto(i); });
                  }
 
